@@ -1,6 +1,8 @@
 import React from 'react';
 import './NavBar.css';
 import logo from './logo.png';
+import accountIcon from './accountIcon.png'; // Correct path to account icon
+import basketIcon from './basketIcon.png';   // Correct path to basket icon
 
 const NavBar = () => {
   return (
@@ -14,8 +16,12 @@ const NavBar = () => {
           <img src={logo} alt="Logo" className="logo-image" />
         </div>
         <div className="nav-right">
-          <button className="nav-button">Account</button>
-          <button className="nav-button">Basket</button>
+          <button className="nav-button">
+            <img src={accountIcon} alt="Account" className="icon-image" />
+          </button>
+          <button className="nav-button">
+            <img src={basketIcon} alt="Basket" className="icon-image" />
+          </button>
         </div>
       </nav>
 

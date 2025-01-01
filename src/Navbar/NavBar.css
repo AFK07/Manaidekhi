@@ -6,7 +6,7 @@
   background-color: #333;
   padding: 10px 20px;
   position: relative;
-  height:200px;
+  height: 200px;
   color: white;
 }
 
@@ -31,7 +31,7 @@
   display: flex;
   justify-content: flex-start;
   margin-left: 200px;
-  gap: 10px;
+  gap: 15px;
 }
 
 /* Bottom row containing clickable links */
@@ -68,22 +68,32 @@
 /* Logo styling */
 .logo-image {
   width: auto;
-  height: 170px;
+  height: 200px;
 }
 
 /* Buttons styling */
 .nav-button {
-  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
   background-color: #555;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  gap: 5px;
 }
 
 .nav-button:hover {
   background-color: #777;
+}
+
+/* Icon styling for buttons */
+.nav-button img {
+  width: 20px;
+  height: 20px;
 }
 
 /* Responsive Design */
