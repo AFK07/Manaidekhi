@@ -1,0 +1,50 @@
+/* Container for the Collection section */
+.collection-container {
+    text-align: center;
+    margin: 20px 0;
+    padding: 20px;
+  }
+  
+  /* Heading styling */
+  .collection-heading {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Grid layout */
+  .collection-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Space between items */
+    padding: 0 20px;
+  }
+  
+  /* Individual collection item */
+  .collection-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ddd; /* Optional border */
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Image styling */
+  .collection-image {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Text styling */
+  .collection-text {
+    font-size: 16px;
+    color: #555;
+  }
+  

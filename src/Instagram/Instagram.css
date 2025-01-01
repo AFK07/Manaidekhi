@@ -1,0 +1,41 @@
+.instagram-container {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .instagram-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px;
+  }
+  
+  .instagram-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .instagram-image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain; /* Adjust image fit */
+  }
+  
+  .instagram-text {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+  }
+  

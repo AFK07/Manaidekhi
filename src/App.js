@@ -1,20 +1,21 @@
 import React from 'react';
-import NavBar from './Navbar/NavBar'; // Corrected path to NavBar component
-import Slideshow from './Slideshow/Slideshow'; // Corrected path to Slideshow component
-import './App.css'; // Import your main CSS file if applicable
-
+import NavBar from './Navbar/NavBar';
+import Slideshow from './Slideshow/Slideshow';
+import Collection from './Collection/Collection';
+import Instagram from './Instagram/Instagram';
 
 function App() {
   return (
     <div className="App">
       <NavBar />
-      {/* Other components */}
       <Slideshow />
-      {/* Additional content */}
+      <Collection />
+      <Instagram />
     </div>
   );
 }
 
 export default App;
+
 
 
