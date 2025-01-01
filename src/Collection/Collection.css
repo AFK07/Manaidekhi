@@ -49,14 +49,41 @@
 .collection-text {
   position: absolute; /* Position the text inside the box */
   bottom: 10px; /* Place it near the bottom */
-  width: 100%; /* Make the text span the width of the box */
-  text-align: center; /* Center-align the text */
-  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-  color: #fff; /* White text color for visibility */
-  font-size: 16px; /* Adjust font size */
-  padding: 5px; /* Add padding around the text */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Center-align the text */
+  background-color: transparent; /* Transparent background */
+  color: #fff; /* White text color */
+  font-size: 18px; /* Adjust font size */
+  padding: 10px 20px; /* Add padding for button-like appearance */
   box-sizing: border-box; /* Include padding in the width/height */
+  z-index: 2; /* Ensure the text is displayed above the image */
+  display: inline-block; /* Inline block for the text and arrow */
+  border: 2px solid #fff; /* White border */
+  border-radius: 4px; /* Optional rounded corners */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+  cursor: pointer; /* Pointer cursor for interactivity */
 }
+
+/* Add an arrow after the text */
+.collection-text::after {
+  content: ' →'; /* Right arrow symbol */
+  position: relative;
+  opacity: 1; /* Always visible */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Hover effect for the button */
+.collection-text:hover {
+  background-color: #fff; /* White background on hover */
+  color: #333; /* Change text color for contrast */
+}
+
+/* On hover, move the arrow and make it visible */
+.collection-text:hover::after {
+  transform: translateX(5px); /* Move the arrow slightly to the right */
+}
+
+
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {

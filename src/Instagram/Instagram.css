@@ -29,6 +29,7 @@
     transition: all 0.3s ease; /* Smooth resizing */
   }
   
+  
   /* Base image styling */
   .base-image {
     width: 100%;
