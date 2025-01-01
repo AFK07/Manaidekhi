@@ -12,30 +12,82 @@
   
   .instagram-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    gap: 20px;
+    grid-template-columns: repeat(4, 405px); /* 4 columns for larger screens */
+    gap: 30px; /* Consistent gap between rows and columns */
+    justify-content: center; /* Center-align the grid */
+    margin: 0 auto; /* Ensure the grid stays centered */
   }
   
   .instagram-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    width: 405px; /* Default width */
+    height: 405px; /* Default height */
     border: 1px solid #ccc;
-    padding: 20px;
     border-radius: 8px;
     background-color: #f9f9f9;
+    overflow: hidden; /* Clip content to box boundaries */
+    transition: all 0.3s ease; /* Smooth resizing */
   }
   
+  /* Base image styling */
+  .base-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire box without distortion */
+    transition: opacity 0.3s ease; /* Smooth transition for fading */
+  }
+  
+  /* Hover effect to fade the base image */
+  .instagram-item:hover .base-image {
+    opacity: 0.6; /* Slight fade effect */
+  }
+  
+  /* Overlay image styling */
   .instagram-image {
-    width: 100px;
-    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 15%; /* Set overlay size relative to the box */
+    height: auto;
     object-fit: contain; /* Adjust image fit */
+    opacity: 0; /* Initially invisible */
+    transition: opacity 0.3s ease; /* Smooth transition for visibility */
   }
   
-  .instagram-text {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #555;
+  /* Overlay image becomes visible on hover */
+  .instagram-item:hover .instagram-image {
+    opacity: 1; /* Make the overlay image visible on hover */
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .instagram-grid {
+      grid-template-columns: repeat(3, 1fr); /* Adjust to 3 columns */
+      gap: 20px; /* Reduce gap for smaller screens */
+    }
+  
+    .instagram-item {
+      width: 90%; /* Shrink box width proportionally */
+      max-width: 300px; /* Set maximum width */
+      height: auto; /* Adjust height automatically */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .instagram-grid {
+      grid-template-columns: repeat(2, 1fr); /* Adjust to 2 columns */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .instagram-grid {
+      grid-template-columns: 1fr; /* Adjust to 1 column for very small screens */
+    }
+  
+    .instagram-item {
+      width: 100%; /* Full width for small screens */
+      height: auto; /* Adjust height automatically */
+    }
   }
   

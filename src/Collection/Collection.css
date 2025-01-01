@@ -1,50 +1,77 @@
-/* Container for the Collection section */
+/* Container for the entire collection */
 .collection-container {
-    text-align: center;
-    margin: 20px 0;
-    padding: 20px;
-  }
-  
-  /* Heading styling */
-  .collection-heading {
-    font-size: 36px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  /* Grid layout */
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Heading for the collection */
+.collection-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Grid layout for collection items */
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 550px); /* 3 columns, each 550px wide */
+  gap: 30px; /* Space between boxes */
+  justify-content: center; /* Center the grid */
+  margin: 0 auto;
+}
+
+/* Individual collection item styling */
+.collection-item {
+  position: relative; /* Enable stacking of elements */
+  width: 550px; /* Updated width */
+  height: 550px; /* Updated height */
+  border: 1px solid #ccc; /* Optional border */
+  border-radius: 8px; /* Optional rounded corners */
+  background-color: #f9f9f9; /* Background color */
+  overflow: hidden; /* Clip content to box boundaries */
+}
+
+/* Image styling to ensure it fits the box */
+.collection-image {
+  width: 100%; /* Fully covers the width of the box */
+  height: 100%; /* Fully covers the height of the box */
+  object-fit: cover; /* Ensures the image covers the entire box without distortion */
+  transition: transform 0.3s ease-in-out; /* Smooth zoom transition */
+}
+
+/* Zoom effect on hover */
+.collection-item:hover .collection-image {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Text styling inside the box */
+.collection-text {
+  position: absolute; /* Position the text inside the box */
+  bottom: 10px; /* Place it near the bottom */
+  width: 100%; /* Make the text span the width of the box */
+  text-align: center; /* Center-align the text */
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  color: #fff; /* White text color for visibility */
+  font-size: 16px; /* Adjust font size */
+  padding: 5px; /* Add padding around the text */
+  box-sizing: border-box; /* Include padding in the width/height */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
   .collection-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns */
-    gap: 20px; /* Space between items */
-    padding: 0 20px;
+    grid-template-columns: repeat(2, 550px); /* Switch to 2 columns for medium screens */
   }
-  
-  /* Individual collection item */
+}
+
+@media (max-width: 768px) {
+  .collection-grid {
+    grid-template-columns: 1fr; /* Switch to 1 column for smaller screens */
+  }
+
   .collection-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #ddd; /* Optional border */
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Adjust width to fit smaller screens */
+    height: auto; /* Let the height adjust dynamically */
   }
-  
-  /* Image styling */
-  .collection-image {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  /* Text styling */
-  .collection-text {
-    font-size: 16px;
-    color: #555;
-  }
-  
+}
