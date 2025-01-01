@@ -1,0 +1,110 @@
+/* Top navigation bar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 10px 20px;
+  position: relative;
+  height:200px;
+  color: white;
+}
+
+/* Left section containing the search input */
+.nav-left {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 200px;
+}
+
+/* Center section containing the logo */
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Right section containing account and basket buttons */
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 200px;
+  gap: 10px;
+}
+
+/* Bottom row containing clickable links */
+.navbar-bottom {
+  display: flex;
+  justify-content: center;
+  background-color: #444;
+  padding: 10px 0;
+}
+
+/* Styling for clickable links */
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #dddddd;
+}
+
+/* Search input styling */
+.search-input {
+  max-width: 200px;
+  width: 100%;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Logo styling */
+.logo-image {
+  width: auto;
+  height: 170px;
+}
+
+/* Buttons styling */
+.nav-button {
+  padding: 5px 15px;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.nav-button:hover {
+  background-color: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .nav-left,
+  .nav-right {
+    margin: 0;
+    justify-content: center;
+  }
+
+  .navbar-bottom {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .nav-link {
+    margin: 5px 0;
+  }
+}

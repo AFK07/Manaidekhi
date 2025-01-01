@@ -1,0 +1,18 @@
+.slide-container {
+    width:100%;
+    margin: 0 auto;
+}
+
+.each-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    background: lightgray;
+}
+
+.slide-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
