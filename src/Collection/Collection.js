@@ -1,16 +1,14 @@
 import React from 'react';
 import './Collection.css';
-import candle from './candles.jpeg'; // Ensure the correct path to the image
-import mold from './mold.JPG'; // Ensure the correct path to the image
-import extra from './extra.jpg'; // Ensure the correct path to the image
+import candle from './candles.jpeg';
+import mold from './mold.JPG';
+import extra from './extra.jpg';
 
 const Collection = () => {
-  // Example data for the collection items
   const items = [
-    { id: 1, text: 'Glass Candles', image: candle }, // Default image
-    { id: 2, text: 'Mold Candles', image: mold },     // New mold image
-    { id: 3, text: 'Coming Soon....', image: extra }
-
+    { id: 1, text: 'Glass Candles', image: candle },
+    { id: 2, text: 'Mold Candles', image: mold },
+    { id: 3, text: 'Coming Soon....', image: extra },
   ];
 
   return (
@@ -29,5 +27,3 @@ const Collection = () => {
 };
 
 export default Collection;
-
-

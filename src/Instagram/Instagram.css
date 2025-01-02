@@ -22,7 +22,7 @@
     position: relative;
     width: 405px; /* Default width */
     height: 405px; /* Default height */
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 8px;
     background-color: #f9f9f9;
     overflow: hidden; /* Clip content to box boundaries */

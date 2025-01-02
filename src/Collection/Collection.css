@@ -1,4 +1,3 @@
-/* Container for the entire collection */
 .collection-container {
   width: 100%;
   padding: 20px;
@@ -26,7 +25,7 @@
   position: relative; /* Enable stacking of elements */
   width: 550px; /* Updated width */
   height: 550px; /* Updated height */
-  border: 1px solid #ccc; /* Optional border */
+  border: none; /* Optional border */
   border-radius: 8px; /* Optional rounded corners */
   background-color: #f9f9f9; /* Background color */
   overflow: hidden; /* Clip content to box boundaries */
