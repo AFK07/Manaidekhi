@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import './NavBar.css';
-import logo from './logo.png';
-import accountIcon from './accountIcon.png';
-import basketIcon from './basketIcon.png';
+import React, { useState } from "react";
+import "./NavBar.css";
+import logo from "./logo.png";
+import accountIcon from "./accountIcon.png";
+import basketIcon from "./basketIcon.png";
 
 const NavBar = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -49,15 +49,34 @@ const NavBar = () => {
         ],
       },
     },
-    "Mold Candles": ["Mold Candle1", "Mold Candle2", "Mold Candle3"],
+    "Mold Candles": [
+      "Daisy",
+      "Owl",
+      "Cactus",
+      "Cake Small",
+      "Cupcake",
+      "Cheese Stack",
+      "Peony",
+      "Body",
+      "Small Bubble",
+      "Rose Love",
+      "Couple",
+      "Cube Love",
+      "Big Bubble",
+      "Cake",
+      "Hug",
+      "Floral Pillar",
+      "Christmas Pillar & Christmas Ball",
+    ],
   };
 
   const handleShopAllClick = () => {
-    setDropdownVisible(!dropdownVisible);
-    setSelectedCategory(null);
-    setSubItemsVisible(null);
-    setSubSubItemsVisible(null);
+    setDropdownVisible((prev) => !prev); // Toggle the dropdown visibility
+    setSelectedCategory(null); // Reset category selection
+    setSubItemsVisible(null); // Reset subcategory selection
+    setSubSubItemsVisible(null); // Reset sub-subcategory selection
   };
+  
 
   const handleCategoryClick = (category) => {
     if (selectedCategory === category) {
@@ -98,57 +117,62 @@ const NavBar = () => {
         <a href="#" className="nav-link" onClick={handleShopAllClick}>
           Shop All
         </a>
-        <a href="/about-us" className="nav-link">About Us</a>
-        <a href="/contact-us" className="nav-link">Contact Us</a>
+        <a href="/about-us" className="nav-link">
+          About Us
+        </a>
+        <a href="/contact-us" className="nav-link">
+          Contact Us
+        </a>
       </div>
 
-      <div
-  className={`dropdown ${dropdownVisible ? "dropdown-visible" : ""}`}
->
-  <div className="dropdown-column">
-    {Object.keys(categories).map((category) => (
-      <div
-        key={category}
-        className={`dropdown-category ${
-          selectedCategory === category ? "selected" : ""
-        }`}
-        onClick={() => handleCategoryClick(category)}
-      >
-        {category}
-      </div>
-    ))}
-  </div>
-  <div className="dropdown-options">
-    {subItemsVisible &&
-      categories[subItemsVisible]?.options?.map((subCategory) => (
-        <div
-          key={subCategory}
-          className="dropdown-sub-item"
-          onClick={() => handleSubCategoryClick(subCategory)}
-        >
-          {subCategory}
+      <div className={`dropdown ${dropdownVisible ? "dropdown-visible" : ""}`}>
+        <div className="dropdown-column">
+          {Object.keys(categories).map((category) => (
+            <div
+              key={category}
+              className={`dropdown-category ${
+                selectedCategory === category ? "selected" : ""
+              }`}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category}
+            </div>
+          ))}
         </div>
-      ))}
-  </div>
-  <div className="dropdown-sub-options">
-    {subSubItemsVisible &&
-      categories[subItemsVisible]?.subOptions[subSubItemsVisible]?.map(
-        (item, index) => (
-          <div key={index} className="dropdown-sub-sub-item">
-            {item}
+        <div className="dropdown-options">
+          {subItemsVisible &&
+            categories[subItemsVisible]?.options?.map((subCategory) => (
+              <div
+                key={subCategory}
+                className="dropdown-sub-item"
+                onClick={() => handleSubCategoryClick(subCategory)}
+              >
+                {subCategory}
+              </div>
+            ))}
+        </div>
+        <div className="dropdown-sub-options">
+          {subSubItemsVisible &&
+            categories[subItemsVisible]?.subOptions?.[subSubItemsVisible]?.map(
+              (item, index) => (
+                <div key={index} className="dropdown-sub-sub-item">
+                  {item}
+                </div>
+              )
+            )}
+          {selectedCategory === "Mold Candles" &&
+            categories["Mold Candles"]?.map((item, index) => (
+              <div key={index} className="dropdown-sub-sub-item">
+                {item}
+              </div>
+            ))}
+        </div>
+        {selectedCategory && (
+          <div className="dropdown-view-all-right">
+            <a href="#">View All</a>
           </div>
-        )
-      )}
-  </div>
-  {subSubItemsVisible && (
-    <div className="view-all-container">
-      <a href="#" className="view-all-link">
-        View All
-      </a>
-    </div>
-  )}
-</div>
-
+        )}
+      </div>
     </>
   );
 };
