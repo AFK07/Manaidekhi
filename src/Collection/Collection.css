@@ -1,103 +1,137 @@
+/* General Container */
 .collection-container {
   width: 100%;
   padding: 20px;
   text-align: center;
 }
 
-/* Heading for the collection */
+/* Heading */
 .collection-heading {
   font-size: 24px;
   margin-bottom: 20px;
   color: #333;
 }
 
-/* Grid layout for collection items */
+/* Collection Grid */
 .collection-grid {
   display: grid;
-  grid-template-columns: repeat(3, 550px); /* 3 columns, each 550px wide */
-  gap: 30px; /* Space between boxes */
-  justify-content: center; /* Center the grid */
+  grid-template-columns: repeat(3, 550px);
+  gap: 30px;
+  justify-content: center;
   margin: 0 auto;
 }
 
-/* Individual collection item styling */
+/* Individual Items */
 .collection-item {
-  position: relative; /* Enable stacking of elements */
-  width: 550px; /* Updated width */
-  height: 550px; /* Updated height */
-  border: none; /* Optional border */
-  border-radius: 8px; /* Optional rounded corners */
-  background-color: #f9f9f9; /* Background color */
-  overflow: hidden; /* Clip content to box boundaries */
-}
-
-/* Image styling to ensure it fits the box */
-.collection-image {
-  width: 100%; /* Fully covers the width of the box */
-  height: 100%; /* Fully covers the height of the box */
-  object-fit: cover; /* Ensures the image covers the entire box without distortion */
-  transition: transform 0.3s ease-in-out; /* Smooth zoom transition */
-}
-
-/* Zoom effect on hover */
-.collection-item:hover .collection-image {
-  transform: scale(1.1); /* Slight zoom on hover */
-}
-
-/* Text styling inside the box */
-.collection-text {
-  position: absolute; /* Position the text inside the box */
-  bottom: 10px; /* Place it near the bottom */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Center-align the text */
-  background-color: transparent; /* Transparent background */
-  color: #fff; /* White text color */
-  font-size: 18px; /* Adjust font size */
-  padding: 10px 20px; /* Add padding for button-like appearance */
-  box-sizing: border-box; /* Include padding in the width/height */
-  z-index: 2; /* Ensure the text is displayed above the image */
-  display: inline-block; /* Inline block for the text and arrow */
-  border: 2px solid #fff; /* White border */
-  border-radius: 4px; /* Optional rounded corners */
-  transition: all 0.3s ease; /* Smooth transition for hover effect */
-  cursor: pointer; /* Pointer cursor for interactivity */
-}
-
-/* Add an arrow after the text */
-.collection-text::after {
-  content: ' →'; /* Right arrow symbol */
   position: relative;
-  opacity: 1; /* Always visible */
-  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  width: 550px;
+  height: 550px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-/* Hover effect for the button */
+.collection-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection-text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 .collection-text:hover {
-  background-color: #fff; /* White background on hover */
-  color: #333; /* Change text color for contrast */
-}
-
-/* On hover, move the arrow and make it visible */
-.collection-text:hover::after {
-  transform: translateX(5px); /* Move the arrow slightly to the right */
+  background-color: #333;
+  color: #fff;
+  border-color: #fff;
 }
 
 
 
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-  .collection-grid {
-    grid-template-columns: repeat(2, 550px); /* Switch to 2 columns for medium screens */
-  }
+
+/* Scrollable Glass Row */
+.glass-scroll-container {
+  max-height: 400px;
+  overflow-x: hidden; /* Hide the horizontal scrollbar */
+  overflow-y: hidden; /* Disable vertical scrolling */
+  margin-top: 20px;
+  white-space: nowrap; /* Prevent items from wrapping */
+  scroll-behavior: smooth; /* Smooth scrolling */
+  cursor: grab; /* Cursor indicates draggable area */
 }
 
+/* Cursor changes during dragging */
+.glass-scroll-container:active {
+  cursor: grabbing;
+}
+
+/* Glass Row Items */
+.glass-row-scroll {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  justify-content: flex-start; /* Align items to the left */
+  user-select: none; /* Prevent text selection during dragging */
+}
+
+.glass-item {
+  flex: 0 0 250px; /* Fixed width for each item */
+  height: 250px;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease; /* Smooth hover transition */
+}
+
+.glass-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fit image to box */
+  transition: transform 0.3s ease; /* Smooth zoom on hover */
+}
+
+.glass-text {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Hover Effect */
+.glass-item:hover .glass-image {
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.glass-item:hover .glass-text {
+  background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .collection-grid {
-    grid-template-columns: 1fr; /* Switch to 1 column for smaller screens */
+    grid-template-columns: 1fr; /* Adjust to 1 column for smaller screens */
   }
 
-  .collection-item {
-    width: 100%; /* Adjust width to fit smaller screens */
-    height: auto; /* Let the height adjust dynamically */
+  .glass-item {
+    flex: 0 0 200px; /* Smaller item size for smaller screens */
+    height: 200px;
   }
 }
