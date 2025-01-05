@@ -44,8 +44,7 @@ const NavBar = () => {
           "Spa Retreat",
           "Peach Mango",
           "Cocoa Butter",
-          "Fresh Linen",
-          "Ocean Breeze",
+          
         ],
       },
     },

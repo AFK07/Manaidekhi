@@ -1,18 +1,15 @@
-/* General Container */
 .collection-container {
   width: 100%;
   padding: 20px;
   text-align: center;
 }
 
-/* Heading */
 .collection-heading {
   font-size: 24px;
   margin-bottom: 20px;
   color: #333;
 }
 
-/* Collection Grid */
 .collection-grid {
   display: grid;
   grid-template-columns: repeat(3, 550px);
@@ -21,7 +18,6 @@
   margin: 0 auto;
 }
 
-/* Individual Items */
 .collection-item {
   position: relative;
   width: 550px;
@@ -64,31 +60,46 @@
 /* Scrollable Glass Row */
 .glass-scroll-container {
   max-height: 400px;
-  overflow-x: hidden; /* Hide the horizontal scrollbar */
-  overflow-y: hidden; /* Disable vertical scrolling */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scrolling */
   margin-top: 20px;
   white-space: nowrap; /* Prevent items from wrapping */
   scroll-behavior: smooth; /* Smooth scrolling */
-  cursor: grab; /* Cursor indicates draggable area */
+  cursor: grab; /* Indicate draggable area */
+  padding-bottom: 20px; /* Push the scrollbar lower */
 }
 
-/* Cursor changes during dragging */
 .glass-scroll-container:active {
   cursor: grabbing;
+}
+
+.glass-scroll-container::-webkit-scrollbar {
+  height: 10px; /* Adjust scrollbar height */
+}
+
+.glass-scroll-container::-webkit-scrollbar-thumb {
+  background: #888; /* Set scrollbar thumb color */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.glass-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
 }
 
 /* Glass Row Items */
 .glass-row-scroll {
   display: flex;
   gap: 20px;
-  padding: 10px;
-  justify-content: flex-start; /* Align items to the left */
+  padding: 0px; /* Add padding for better spacing */
+  justify-content: flex-start;
   user-select: none; /* Prevent text selection during dragging */
 }
 
+
+/* Glass Row Items */
 .glass-item {
-  flex: 0 0 250px; /* Fixed width for each item */
-  height: 250px;
+  flex: 0 0 400px; /* Increased width (250px + 150px) */
+  height: 400px;   /* Increased height (250px + 150px) */
   border-radius: 8px;
   overflow: hidden;
   position: relative;
@@ -115,7 +126,7 @@
   text-align: center;
 }
 
-/* Hover Effect */
+
 .glass-item:hover .glass-image {
   transform: scale(1.05); /* Slight zoom effect */
 }
@@ -124,7 +135,6 @@
   background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
   .collection-grid {
     grid-template-columns: 1fr; /* Adjust to 1 column for smaller screens */
@@ -135,3 +145,6 @@
     height: 200px;
   }
 }
+
+
+
