@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import useEffect here
 import './Collection.css';
 import candle from './candles.jpeg';
 import mold from './mold.JPG';
@@ -38,10 +38,19 @@ import bigbubble from './bigbubble.JPG';
 import cupcake from './cupcake.JPG';
 import floralpillar from './floralpillar.webp';
 
-const Collection = () => {
+const Collection = ({ activeCategory }) => {
   const [showRow, setShowRow] = useState({ glass: false, mold: false });
   const [animateClass, setAnimateClass] = useState('');
 
+  useEffect(() => {
+    if (activeCategory === 'Glass Candles') {
+      setShowRow({ glass: true, mold: false });
+    } else if (activeCategory === 'Mold Candles') {
+      setShowRow({ glass: false, mold: true });
+    }
+  }, [activeCategory]);
+
+  // The rest of your code remains unchanged
   const items = [
     { id: 1, text: 'Glass Candles', image: candle, type: 'glass' },
     { id: 2, text: 'Mold Candles', image: mold, type: 'mold' },

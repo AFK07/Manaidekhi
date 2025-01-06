@@ -4,7 +4,7 @@ import logo from "./logo.png";
 import accountIcon from "./accountIcon.png";
 import basketIcon from "./basketIcon.png";
 
-const NavBar = () => {
+const NavBar = ({ onActivateCollection }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [subItemsVisible, setSubItemsVisible] = useState(null);
@@ -44,7 +44,6 @@ const NavBar = () => {
           "Spa Retreat",
           "Peach Mango",
           "Cocoa Butter",
-          
         ],
       },
     },
@@ -75,7 +74,6 @@ const NavBar = () => {
     setSubItemsVisible(null); // Reset subcategory selection
     setSubSubItemsVisible(null); // Reset sub-subcategory selection
   };
-  
 
   const handleCategoryClick = (category) => {
     if (selectedCategory === category) {
@@ -91,6 +89,11 @@ const NavBar = () => {
 
   const handleSubCategoryClick = (subCategory) => {
     setSubSubItemsVisible(subCategory);
+  };
+
+  const handleViewAllClick = () => {
+    if (onActivateCollection) onActivateCollection(selectedCategory);
+    setDropdownVisible(false); // Close the dropdown after triggering the callback
   };
 
   return (
@@ -168,7 +171,9 @@ const NavBar = () => {
         </div>
         {selectedCategory && (
           <div className="dropdown-view-all-right">
-            <a href="#">View All</a>
+            <a href="#" onClick={handleViewAllClick}>
+              View All
+            </a>
           </div>
         )}
       </div>
