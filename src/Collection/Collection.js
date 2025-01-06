@@ -1,9 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './Collection.css';
 import candle from './candles.jpeg';
 import mold from './mold.JPG';
 import extra from './extra.jpg';
-// Image Imports
+// Glass Candle Images
 import vanilla from './vanilla.jpeg';
 import strawberryShortcake from './strawberry.jpeg';
 import berries from './berries.jpeg';
@@ -18,22 +18,33 @@ import sandalwood from './sandalwood.jpeg';
 import greenApple from './greenapple.jpeg';
 import berryBonanza from './berrybonanza.jpeg';
 import flowerValley from './flowervalley.jpeg';
-import purpleRain from './purplerain.jpeg';
 import bubbleGum from './bubblegum.jpeg';
 import royalRose from './royalrose.jpeg';
 import eucalyptus from './eucaluptus.jpeg';
 import spaRetreat from './sparetreat.jpeg';
 import peachMango from './peachmango.jpeg';
 import cocoaButter from './cocoabutter.jpeg';
-
+// Mold Candle Images
+import roselove from './roselove.JPG';
+import couple from './couple.JPG';
+import body from './body.JPG';
+import cakesmall from './cakesmall.jpg';
+import peony from './peony.jpg';
+import cheesestack from './cheesestack.JPG';
+import owl from './owl.JPG';
+import hug from './hug.JPG';
+import smallbubble from './smallbubble.JPG';
+import bigbubble from './bigbubble.JPG';
+import cupcake from './cupcake.JPG';
+import floralpillar from './floralpillar.webp';
 
 const Collection = () => {
-  const [showGlassRow, setShowGlassRow] = useState(false);
-  const glassRowRef = useRef(null);
+  const [showRow, setShowRow] = useState({ glass: false, mold: false });
+  const [animateClass, setAnimateClass] = useState('');
 
   const items = [
-    { id: 1, text: 'Glass Candles', image: candle },
-    { id: 2, text: 'Mold Candles', image: mold },
+    { id: 1, text: 'Glass Candles', image: candle, type: 'glass' },
+    { id: 2, text: 'Mold Candles', image: mold, type: 'mold' },
     { id: 3, text: 'Coming Soon....', image: extra },
   ];
 
@@ -52,19 +63,39 @@ const Collection = () => {
     { id: 12, image: greenApple, text: 'Green Apple' },
     { id: 13, image: berryBonanza, text: 'Berry Bonanza' },
     { id: 14, image: flowerValley, text: 'Flower Valley' },
-    { id: 15, image: purpleRain, text: 'Purple Rain' },
-    { id: 16, image: bubbleGum, text: 'Bubble Gum' },
-    { id: 17, image: royalRose, text: 'Royal Rose' },
-    { id: 18, image: eucalyptus, text: 'Eucalyptus' },
-    { id: 19, image: spaRetreat, text: 'Spa Retreat' },
-    { id: 20, image: peachMango, text: 'Peach Mango' },
-    { id: 21, image: cocoaButter, text: 'Cocoa Butter' }
+    { id: 15, image: bubbleGum, text: 'Bubble Gum' },
+    { id: 16, image: royalRose, text: 'Royal Rose' },
+    { id: 17, image: eucalyptus, text: 'Eucalyptus' },
+    { id: 18, image: spaRetreat, text: 'Spa Retreat' },
+    { id: 19, image: peachMango, text: 'Peach Mango' },
+    { id: 20, image: cocoaButter, text: 'Cocoa Butter' },
   ];
 
-  const handleWheelScroll = (event) => {
-    if (glassRowRef.current && event.deltaY !== 0) {
-      event.preventDefault(); // Prevent vertical scrolling
-      glassRowRef.current.scrollLeft += event.deltaY; // Scroll horizontally
+  const moldItems = [
+    { id: 1, image: roselove, text: 'Rose Love' },
+    { id: 2, image: couple, text: 'Couple' },
+    { id: 3, image: body, text: 'Body Sculptures' },
+    { id: 4, image: cakesmall, text: 'Cake Candles' },
+    { id: 5, image: peony, text: 'Peony' },
+    { id: 6, image: cheesestack, text: 'Cheese Stack' },
+    { id: 7, image: owl, text: 'Owl Candles' },
+    { id: 8, image: hug, text: 'Hug Candles' },
+    { id: 9, image: smallbubble, text: 'Small Bubble Candles' },
+    { id: 10, image: bigbubble, text: 'Big Bubble Candles' },
+    { id: 11, image: cupcake, text: 'Cupcake Candles' },
+    { id: 12, image: floralpillar, text: 'Floral Pillar' },
+  ];
+
+  const handleRowToggle = (type) => {
+    if (showRow[type]) {
+      setAnimateClass('animate-reverse');
+      setTimeout(() => {
+        setShowRow({ ...showRow, [type]: false });
+        setAnimateClass('');
+      }, (type === 'glass' ? glassItems : moldItems).length * 100 + 500);
+    } else {
+      setAnimateClass('animate-forward');
+      setShowRow({ ...showRow, [type]: true });
     }
   };
 
@@ -77,9 +108,7 @@ const Collection = () => {
             <img src={item.image} alt={item.text} className="collection-image" />
             <p
               className="collection-text"
-              onClick={() => {
-                if (item.text === 'Glass Candles') setShowGlassRow(!showGlassRow);
-              }}
+              onClick={() => handleRowToggle(item.type)}
             >
               {item.text}
             </p>
@@ -87,17 +116,26 @@ const Collection = () => {
         ))}
       </div>
 
-      {showGlassRow && (
-        <div
-          className="glass-scroll-container"
-          ref={glassRowRef}
-          onWheel={handleWheelScroll}
-        >
-          <div className="glass-row-scroll">
+      {showRow.glass && (
+        <div className={`scroll-container ${animateClass}`}>
+          <div className="row-scroll">
             {glassItems.map((glass) => (
-              <div key={glass.id} className="glass-item">
-                <img src={glass.image} alt={glass.text} className="glass-image" />
-                <p className="glass-text">{glass.text}</p>
+              <div key={glass.id} className="item">
+                <img src={glass.image} alt={glass.text} className="item-image" />
+                <p className="item-text">{glass.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {showRow.mold && (
+        <div className={`scroll-container ${animateClass}`}>
+          <div className="row-scroll">
+            {moldItems.map((mold) => (
+              <div key={mold.id} className="item">
+                <img src={mold.image} alt={mold.text} className="item-image" />
+                <p className="item-text">{mold.text}</p>
               </div>
             ))}
           </div>
