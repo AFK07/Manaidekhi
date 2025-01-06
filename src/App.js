@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import NavBar from './Navbar/NavBar';
 import Slideshow from './Slideshow/Slideshow';
@@ -7,9 +7,15 @@ import Instagram from './Instagram/Instagram';
 
 function App() {
   const [activeCategory, setActiveCategory] = useState(null); // Tracks the active category for the collection
+  const collectionRef = useRef(null); // Ref to the collection section
 
   const handleActivateCollection = (category) => {
     setActiveCategory(category); // Activates the selected collection category
+
+    // Scroll smoothly to the collection section
+    if (collectionRef.current) {
+      collectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -18,8 +24,10 @@ function App() {
         {/* Pass handleActivateCollection to NavBar */}
         <NavBar onActivateCollection={handleActivateCollection} />
         <Slideshow />
-        {/* Pass activeCategory to Collection */}
-        <Collection activeCategory={activeCategory} />
+        {/* Add a ref to the Collection component */}
+        <div ref={collectionRef}>
+          <Collection activeCategory={activeCategory} />
+        </div>
         <Instagram />
       </div>
     </div>
@@ -27,5 +35,4 @@ function App() {
 }
 
 export default App;
-
 
