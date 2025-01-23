@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Import useEffect here
+import React, { useState, useEffect, useRef } from 'react';
 import './Collection.css';
 import candle from './candles.jpeg';
 import mold from './mold.JPG';
@@ -38,9 +38,10 @@ import bigbubble from './bigbubble.JPG';
 import cupcake from './cupcake.JPG';
 import floralpillar from './floralpillar.webp';
 
-const Collection = ({ activeCategory }) => {
+const Collection = ({ activeCategory, selectedItem }) => {
   const [showRow, setShowRow] = useState({ glass: false, mold: false });
   const [animateClass, setAnimateClass] = useState('');
+  const itemRefs = useRef({});
 
   useEffect(() => {
     if (activeCategory === 'Glass Candles') {
@@ -50,7 +51,12 @@ const Collection = ({ activeCategory }) => {
     }
   }, [activeCategory]);
 
-  // The rest of your code remains unchanged
+  useEffect(() => {
+    if (selectedItem && itemRefs.current[selectedItem]) {
+      itemRefs.current[selectedItem].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [selectedItem]);
+
   const items = [
     { id: 1, text: 'Glass Candles', image: candle, type: 'glass' },
     { id: 2, text: 'Mold Candles', image: mold, type: 'mold' },
@@ -129,7 +135,11 @@ const Collection = ({ activeCategory }) => {
         <div className={`scroll-container ${animateClass}`}>
           <div className="row-scroll">
             {glassItems.map((glass) => (
-              <div key={glass.id} className="item">
+              <div
+                key={glass.id}
+                className="item"
+                ref={(el) => (itemRefs.current[glass.text] = el)}
+              >
                 <img src={glass.image} alt={glass.text} className="item-image" />
                 <p className="item-text">{glass.text}</p>
               </div>
@@ -142,7 +152,11 @@ const Collection = ({ activeCategory }) => {
         <div className={`scroll-container ${animateClass}`}>
           <div className="row-scroll">
             {moldItems.map((mold) => (
-              <div key={mold.id} className="item">
+              <div
+                key={mold.id}
+                className="item"
+                ref={(el) => (itemRefs.current[mold.text] = el)}
+              >
                 <img src={mold.image} alt={mold.text} className="item-image" />
                 <p className="item-text">{mold.text}</p>
               </div>

@@ -1,74 +1,21 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types"; // Add PropTypes
+import { useNavigate, Link } from "react-router-dom"; // Import useNavigate and Link
 import "./NavBar.css";
 import logo from "./logo.png";
 import accountIcon from "./accountIcon.png";
 import basketIcon from "./basketIcon.png";
+import { categories } from "./categories"; // Import categories from a separate file
 
 const NavBar = ({ onActivateCollection }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [subItemsVisible, setSubItemsVisible] = useState(null);
   const [subSubItemsVisible, setSubSubItemsVisible] = useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
 
-  const categories = {
-    "Glass Candles": {
-      options: ["Big Glass", "Medium Glass"],
-      subOptions: {
-        "Big Glass": [
-          "Vanilla",
-          "Strawberry Shortcake",
-          "Berries",
-          "Chocolate",
-          "Coffee",
-          "Sandalwood",
-          "Mint",
-          "Lemon",
-          "Jasmine",
-          "Cotton Candy",
-          "Lemon Grass",
-          "Rose",
-          "Green Apple",
-          "Bubble Gum",
-          "Creamy Peach",
-          "Mix Fruit",
-          "Lavender",
-        ],
-        "Medium Glass": [
-          "Berry Bonanza",
-          "Flower Valley",
-          "Purple Rain",
-          "Green Apple",
-          "Bubble Gum",
-          "Royal Rose",
-          "Eucalyptus",
-          "Spa Retreat",
-          "Peach Mango",
-          "Cocoa Butter",
-        ],
-      },
-    },
-    "Mold Candles": [
-      "Daisy",
-      "Owl",
-      "Cactus",
-      "Cake Small",
-      "Cupcake",
-      "Cheese Stack",
-      "Peony",
-      "Body",
-      "Small Bubble",
-      "Rose Love",
-      "Couple",
-      "Cube Love",
-      "Big Bubble",
-      "Cake",
-      "Hug",
-      "Floral Pillar",
-      "Christmas Pillar & Christmas Ball",
-    ],
-  };
-
-  const handleShopAllClick = () => {
+  const handleShopAllClick = (e) => {
+    e.preventDefault(); // Prevent default anchor behavior
     setDropdownVisible((prev) => !prev); // Toggle the dropdown visibility
     setSelectedCategory(null); // Reset category selection
     setSubItemsVisible(null); // Reset subcategory selection
@@ -91,9 +38,24 @@ const NavBar = ({ onActivateCollection }) => {
     setSubSubItemsVisible(subCategory);
   };
 
-  const handleViewAllClick = () => {
-    if (onActivateCollection) onActivateCollection(selectedCategory);
-    setDropdownVisible(false); // Close the dropdown after triggering the callback
+  const handleViewAllClick = (e) => {
+    e.preventDefault(); // Prevent default anchor behavior
+
+    // Navigate to the homepage
+    navigate("/");
+
+    // Activate the selected collection category
+    if (onActivateCollection) {
+      onActivateCollection(selectedCategory);
+    }
+
+    // Close the dropdown
+    setDropdownVisible(false);
+  };
+
+  // Function to handle logo click and navigate to the homepage
+  const handleLogoClick = () => {
+    navigate("/"); // Navigate to the homepage
   };
 
   return (
@@ -103,7 +65,14 @@ const NavBar = ({ onActivateCollection }) => {
           <input type="text" className="search-input" placeholder="Search..." />
         </div>
         <div className="nav-center">
-          <img src={logo} alt="Logo" className="logo-image" />
+          {/* Make the logo clickable */}
+          <img
+            src={logo}
+            alt="Logo"
+            className="logo-image"
+            onClick={handleLogoClick} // Add onClick handler
+            style={{ cursor: "pointer" }} // Change cursor to pointer to indicate it's clickable
+          />
         </div>
         <div className="nav-right">
           <button className="nav-button">
@@ -116,18 +85,32 @@ const NavBar = ({ onActivateCollection }) => {
       </nav>
 
       <div className="navbar-bottom">
-        <a href="#" className="nav-link" onClick={handleShopAllClick}>
+        <a
+          href="#"
+          className="nav-link"
+          onClick={handleShopAllClick}
+          aria-expanded={dropdownVisible}
+          aria-haspopup="true"
+        >
           Shop All
         </a>
-        <a href="/about-us" className="nav-link">
+        {/* Replace <a> with <Link> for smooth navigation */}
+        <Link to="/about-us" className="nav-link">
           About Us
-        </a>
-        <a href="/contact-us" className="nav-link">
+        </Link>
+        <Link to="/contact-us" className="nav-link">
           Contact Us
-        </a>
+        </Link>
       </div>
 
+      {/* Dropdown for Shop All */}
       <div className={`dropdown ${dropdownVisible ? "dropdown-visible" : ""}`}>
+        <button
+          className="dropdown-close-button"
+          onClick={() => setDropdownVisible(false)}
+        >
+          X
+        </button>
         <div className="dropdown-column">
           {Object.keys(categories).map((category) => (
             <div
@@ -179,6 +162,10 @@ const NavBar = ({ onActivateCollection }) => {
       </div>
     </>
   );
+};
+
+NavBar.propTypes = {
+  onActivateCollection: PropTypes.func.isRequired,
 };
 
 export default NavBar;
