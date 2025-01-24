@@ -6,7 +6,7 @@ import Slideshow from './Slideshow/Slideshow';
 import Collection from './Collection/Collection';
 import Instagram from './Instagram/Instagram';
 import AboutUs from './Navbar/AboutUs'; // Import the AboutUs component
-import ContactUs from './Navbar/ContactUs'; // Import the ContactUs component
+
 
 function AppContent() {
   const [activeCategory, setActiveCategory] = useState(null); // Tracks the active category for the collection
@@ -52,8 +52,7 @@ function AppContent() {
           />
           {/* About Us Route */}
           <Route path="/about-us" element={<AboutUs />} />
-          {/* Contact Us Route */}
-          <Route path="/contact-us" element={<ContactUs />} />
+          
         </Routes>
       </div>
     </div>

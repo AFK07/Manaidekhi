@@ -121,30 +121,34 @@
 
 /* General Dropdown Styling */
 .dropdown {
-  display: flex;
-  justify-content: space-between;
+  position: absolute;
+  top: 100%; /* Position directly below the navbar */
+  left: 0;
+  width: 100%;
   background-color: #f9f9f9;
-  padding: 0 20px;
   border: 1px solid #ccc;
+  z-index: 1000;
   max-height: 0;
   overflow: hidden;
   visibility: hidden;
   opacity: 0;
-  transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.3s ease, visibility 0s 0.3s;
+  transition: max-height 0.3s ease, opacity 0.2s ease, visibility 0s 0.3s; /* Adjusted transition */
+  padding: 0; /* Ensure no padding when hidden */
 }
 
 .dropdown-visible {
-  max-height: 600px;
-  padding: 20px;
+  max-height: 600px; /* Adjust as needed */
+  padding: 20px; /* Add padding only when visible */
   visibility: visible;
   opacity: 1;
-  transition: max-height 0.5s ease, padding 0.5s ease, opacity 0.3s ease;
+  transition: max-height 0.5s ease, opacity 0.3s ease; /* Adjusted transition */
 }
 
 /* First Column for Categories */
 .dropdown-column {
   flex: 1;
   padding-right: 20px;
+  padding-left: 40px; /* Add left padding to shift content to the right */
 }
 
 /* Second Column for Subcategories */
@@ -227,17 +231,62 @@
   font-weight: bold;
 }
 
-/* View All Button Styling */
+
 .dropdown-view-all-right {
-  flex: 0.5;
+  flex: 0 1 auto; /* Prevent the button from stretching too far */
   text-align: right;
   font-size: 18px;
   color: #007BFF;
   cursor: pointer;
-  padding: 10px 0;
+  padding: 10px 20px; /* Adjusted padding to reduce stretching */
+  margin-right: 20px; /* Add margin to bring it in from the edge */
   align-self: flex-start;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+.dropdown-view-all-container {
+  display: flex;
+  justify-content: flex-end; /* Align the button to the right */
+  padding-right: 20px; /* Add some padding to bring it in from the edge */
 }
 
 .dropdown-view-all-right:hover {
   color: #0056b3;
+}
+
+/* Contact Icons Styling */
+.contact-icons {
+  display: flex;
+  justify-content: center; /* Center the icons */
+  align-items: center;
+  gap: 90px; /* Add space between the icons */
+  padding: 10px;
+  position: relative; /* For positioning the close button */
+}
+
+.contact-icon {
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.contact-icon:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Close Button Styling (Left Side) */
+.dropdown-close-button {
+  position: absolute; /* Position the button absolutely */
+  left: 20px; /* Adjust distance from the left edge */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Center vertically */
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333; /* Adjust color as needed */
+}
+
+.dropdown-close-button:hover {
+  color: #000; /* Darker color on hover */
 }

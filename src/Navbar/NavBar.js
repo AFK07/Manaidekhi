@@ -1,25 +1,38 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types"; // Add PropTypes
-import { useNavigate, Link } from "react-router-dom"; // Import useNavigate and Link
+import PropTypes from "prop-types";
+import { useNavigate, Link } from "react-router-dom";
 import "./NavBar.css";
 import logo from "./logo.png";
 import accountIcon from "./accountIcon.png";
 import basketIcon from "./basketIcon.png";
-import { categories } from "./categories"; // Import categories from a separate file
+import { categories } from "./categories";
+import insta from "./insta.png"; // Import Instagram icon
+import fb from "./facebook.png"; // Import Facebook icon
+import mail from "./mail.png"; // Import Mail icon
 
 const NavBar = ({ onActivateCollection }) => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [contactDropdownVisible, setContactDropdownVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [subItemsVisible, setSubItemsVisible] = useState(null);
   const [subSubItemsVisible, setSubSubItemsVisible] = useState(null);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
+  // Toggle Shop All dropdown
   const handleShopAllClick = (e) => {
-    e.preventDefault(); // Prevent default anchor behavior
-    setDropdownVisible((prev) => !prev); // Toggle the dropdown visibility
-    setSelectedCategory(null); // Reset category selection
-    setSubItemsVisible(null); // Reset subcategory selection
-    setSubSubItemsVisible(null); // Reset sub-subcategory selection
+    e.preventDefault();
+    setDropdownVisible((prev) => !prev);
+    setContactDropdownVisible(false); // Close Contact Us dropdown
+    setSelectedCategory(null);
+    setSubItemsVisible(null);
+    setSubSubItemsVisible(null);
+  };
+
+  // Toggle Contact Us dropdown
+  const handleContactUsClick = (e) => {
+    e.preventDefault();
+    setContactDropdownVisible((prev) => !prev);
+    setDropdownVisible(false); // Close Shop All dropdown
   };
 
   const handleCategoryClick = (category) => {
@@ -39,23 +52,16 @@ const NavBar = ({ onActivateCollection }) => {
   };
 
   const handleViewAllClick = (e) => {
-    e.preventDefault(); // Prevent default anchor behavior
-
-    // Navigate to the homepage
+    e.preventDefault();
     navigate("/");
-
-    // Activate the selected collection category
     if (onActivateCollection) {
       onActivateCollection(selectedCategory);
     }
-
-    // Close the dropdown
     setDropdownVisible(false);
   };
 
-  // Function to handle logo click and navigate to the homepage
   const handleLogoClick = () => {
-    navigate("/"); // Navigate to the homepage
+    navigate("/");
   };
 
   return (
@@ -65,13 +71,12 @@ const NavBar = ({ onActivateCollection }) => {
           <input type="text" className="search-input" placeholder="Search..." />
         </div>
         <div className="nav-center">
-          {/* Make the logo clickable */}
           <img
             src={logo}
             alt="Logo"
             className="logo-image"
-            onClick={handleLogoClick} // Add onClick handler
-            style={{ cursor: "pointer" }} // Change cursor to pointer to indicate it's clickable
+            onClick={handleLogoClick}
+            style={{ cursor: "pointer" }}
           />
         </div>
         <div className="nav-right">
@@ -94,23 +99,22 @@ const NavBar = ({ onActivateCollection }) => {
         >
           Shop All
         </a>
-        {/* Replace <a> with <Link> for smooth navigation */}
         <Link to="/about-us" className="nav-link">
           About Us
         </Link>
-        <Link to="/contact-us" className="nav-link">
+        <a
+          href="#"
+          className="nav-link"
+          onClick={handleContactUsClick}
+          aria-expanded={contactDropdownVisible}
+          aria-haspopup="true"
+        >
           Contact Us
-        </Link>
+        </a>
       </div>
 
-      {/* Dropdown for Shop All */}
+      {/* Shop All Dropdown */}
       <div className={`dropdown ${dropdownVisible ? "dropdown-visible" : ""}`}>
-        <button
-          className="dropdown-close-button"
-          onClick={() => setDropdownVisible(false)}
-        >
-          X
-        </button>
         <div className="dropdown-column">
           {Object.keys(categories).map((category) => (
             <div
@@ -159,6 +163,29 @@ const NavBar = ({ onActivateCollection }) => {
             </a>
           </div>
         )}
+      </div>
+
+      {/* Contact Us Dropdown */}
+      <div className={`dropdown ${contactDropdownVisible ? "dropdown-visible" : ""}`}>
+        <div className="contact-icons">
+          <a
+            href="https://www.instagram.com/manaidekhi.nepal?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={insta} alt="Instagram" className="contact-icon" />
+          </a>
+          <a
+            href="https://www.facebook.com/manaidekhi.nepal"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={fb} alt="Facebook" className="contact-icon" />
+          </a>
+          <a href="mailto:dekhimanai@gmail.com">
+            <img src={mail} alt="Mail" className="contact-icon" />
+          </a>
+        </div>
       </div>
     </>
   );
